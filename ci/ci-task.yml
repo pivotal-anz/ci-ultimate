@@ -1,0 +1,12 @@
+---
+platform: linux
+
+image: docker:///cfgemfire/concourse-ci
+
+inputs:
+- name: springtrader-cf-repo
+- name: ci-ultimate-repo
+
+run:
+  path: ci-ultimate-repo/scripts/ci-test
+
