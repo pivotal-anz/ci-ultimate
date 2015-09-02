@@ -1,12 +1,11 @@
 ---
-# A script that runs a maven Docker image
+# A script that runs a Gradle Docker image to run integration tests
 resources:
 - name: cf-spring-trader-repo
   type: git
   source:
     uri: https://github.com/cf-platform-eng/springtrader-cf
     branch: master
-
 - name: ci-ultimate-repo
   type: git
   source:
@@ -16,9 +15,9 @@ resources:
 jobs:
 - name: ci-pipeline
   plan:
-  - get: cf-spring-trader-repo
-    trigger: true
   - get: ci-ultimate-repo
+    trigger: true
+  - get: cf-spring-trader-repo
     trigger: true
   - task: unit
     file: ci-ultimate/ci/ci-task.yml
