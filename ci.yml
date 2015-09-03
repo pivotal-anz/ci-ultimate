@@ -20,4 +20,4 @@ jobs:
 #  - get: cf-spring-trader-repo
 #    trigger: true
   - task: unit
-    file: ci-ultimatexx/ci/ci-task.yml
+    file: ci-ultimate/ci/ci-task.yml
