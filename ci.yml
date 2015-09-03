@@ -17,7 +17,7 @@ jobs:
   plan:
   - get: ci-ultimate-repo
     trigger: true
-  - get: cf-spring-trader-repo
-    trigger: true
+#  - get: cf-spring-trader-repo
+#    trigger: true
   - task: unit
     file: ci-ultimatexx/ci/ci-task.yml
