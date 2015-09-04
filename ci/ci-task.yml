@@ -4,7 +4,7 @@ platform: linux
 image: docker:///cfgemfire/concourse-ci
 
 inputs:
-- name: cf-spring-trader-repo
+#- name: cf-spring-trader-repo
 - name: ci-ultimate-repo
 
 run:
