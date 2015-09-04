@@ -1,4 +1,7 @@
 #!/bin/sh
 echo "Running checks"
 java -version
-ci-ultimate-repo/tools/gradle/bin/gradlew -version
+cp -R ci-ultimate-repo/tools/gradle/bin/* .
+ls
+gradlew -version
+unzip -h
