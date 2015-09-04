@@ -1,8 +1,17 @@
 #!/bin/sh
 echo "Running checks"
-which java
+ls -l /usr/bin/java
+echo "---"
 java -version
+echo "---"
 echo $PATH
+echo "---"
+ls /
+echo "---"
 ls -l /usr/local/bundle/bin
-
-../tools/gradle/bin/gradle -version
+echo "---"
+pwd
+echo "---"
+ls
+echo "---"
+ci-ultimate-repo/tools/gradle/bin/gradle -version
