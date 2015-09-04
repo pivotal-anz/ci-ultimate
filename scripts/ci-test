@@ -5,4 +5,4 @@ java -version
 echo $PATH
 ls -l /usr/local/bundle/bin
 
-tools/gradle/bin/gradle -version
+../tools/gradle/bin/gradle -version
