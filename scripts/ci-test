@@ -2,6 +2,6 @@
 echo "Running checks"
 java -version
 ls
-unzip ci-ultimate-repo/tools/gradle-2.6.zip
+unzip ci-ultimate-repo/tools/gradle-2.6-bin.zip
 ls
 gradle-2.6/bin/gradle -version
