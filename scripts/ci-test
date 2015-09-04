@@ -2,5 +2,5 @@
 echo "Running checks"
 java -version
 echo $PATH
-gradlew -version
+ls -l /usr/local/bundle/bin
 
