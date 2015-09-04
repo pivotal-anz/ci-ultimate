@@ -8,5 +8,5 @@ inputs:
 - name: ci-ultimate-repo
 
 run:
-  path: ci-ultimate_repo/scripts/ci-test
+  path: ci-ultimate-repo/scripts/ci-test
 
