@@ -1,8 +1,12 @@
 #!/bin/sh
 echo "Running checks"
 java -version
-ls
 unzip -q ci-ultimate-repo/tools/gradle-2.6-bin.zip
-ls
 export TERM=xterm
 gradle-2.6/bin/gradle -version
+
+echo "Running tests"
+cd cf-spring-trader-repo
+pwd
+../gradle-2.6/bin/gradle test
+
