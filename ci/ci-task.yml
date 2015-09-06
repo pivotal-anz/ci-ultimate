@@ -1,7 +1,7 @@
 ---
 platform: linux
 
-image: docker:///cfgemfire/concourse-ci
+image: docker:///java#8-jdk
 
 inputs:
 - name: cf-spring-trader-repo
