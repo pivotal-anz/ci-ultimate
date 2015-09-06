@@ -1,8 +1,9 @@
 #!/bin/sh
+export TERM=xterm
+
 echo "Running checks"
 java -version
 unzip -q ci-ultimate-repo/tools/gradle-2.6-bin.zip
-export TERM=xterm
 gradle-2.6/bin/gradle -version
 
 echo "Running tests"
