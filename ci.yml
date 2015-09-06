@@ -4,7 +4,8 @@ resources:
 - name: cf-spring-trader-repo
   type: git
   source:
-    uri: https://github.com/cf-platform-eng/springtrader-cf
+    #uri: https://github.com/cf-platform-eng/springtrader-cf
+    uri: https://github.com/pivotal-anz/cf-SpringBootTrader
     branch: master
 - name: ci-ultimate-repo
   type: git
