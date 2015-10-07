@@ -49,35 +49,38 @@ A flow, which Concourse calls a Job, consists of Tasks and Resources.
 
 ## Tasks
 
-A task is simply a specification of work to run.  Most tasks are Unix scripts and or executables.  A task is specified by a YAML file, such as `test-task.yml` like this:
+A task is simply a specification of work to run.  Most tasks are Unix scripts and or executables.  A task is specified by a YAML file.  This project has a task defined in `ci/ci-task.yml`:
 
 ```
 ---
 platform: linux
 
-image: docker:///ubuntu#14.04
+image: docker:///java#8-jdk
 
 inputs:
-- name: my-repo
+- name: cf-spring-trader-repo
+- name: ci-ultimate-repo
 
 run:
-  path: my-repo/scripts/test
+  path: ci-ultimate-repo/scripts/ci-test
 ```
 
 Note that the task is actually executed by a Docker container, so I guess the Concourse VM has Docker installed internally.
 
-This task runs the `test` script in `myrepo`.  Which brings us to resources.
+There are many, many images at http://dockerhub.com, we are using a linux VM running Java V8 since we want to run continuous intgration tests on __Spring Trader__ which is a Java application
+
+This task runs the `ci-test` script in `ci-ultimate-repo`.  Which brings us to resources.
 
 ## Resources
 
-The `my-repo` input is a resource and it is specified as part of the job flow like this:
+The `ci-ultimate-repo` input is a resource and it is specified as part of the job flow like this:
 
 ```
 resources:
-- name: my-repo
+- name: ci-ultimate-repo
   type: git
   source:
-    uri: https://github.com/paulc4/my-repo
+    uri: https://github.com/pivotal-anz/ci-ultimate
     branch: master
 ``` 
 
