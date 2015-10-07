@@ -2,7 +2,7 @@
 
 # What is it?
 
-Concourse is really just a flow definition tool a bit like Spring XD excpet instead of a DSL it uses a YAML description file. Although the flow can be visualised, once specified, in the cool web GUI, you can't define it that way.
+Concourse is really just a flow definition tool a bit like Spring Cloud Web Flow (Spring XD) except that instead of a DSL it uses a YAML description file. Although the flow can be visualised, once specified, in the cool web GUI, you can't define it that way.
 
 I personally found the documentation was not really clear until you knew what it was trying to explain, so here is a quick overview on how to use Concourse.
 
@@ -10,7 +10,7 @@ I personally found the documentation was not really clear until you knew what it
 
 ## Local VM
 
-To run Concourse locally you need Vagrant and Virtual box installed.
+To run Concourse locally you need Vagrant and Virtual Box installed.
 
 1. It runs as a local VM using a Vagrant spec. In any directory run:
  
@@ -25,7 +25,7 @@ To run Concourse locally you need Vagrant and Virtual box installed.
 
 1. `fly` is an executable so on Mac or Linux run `chmod a+x` to make it executable.  The Windows version is `fly.exe`, so you can skip this step.
 
-1. Add `fly` to your `PATH` (on a Mac or Linux machine you can just copy it into `/usr/local`).
+1. Add `fly` to your `PATH` (on a Mac or Linux machine you can just copy it into `/usr/local/bin`).
 
 ## Concourse at AWS
 
@@ -37,7 +37,13 @@ A concourse instance is running on AWS at ec2-54-86-210-135.compute-1.amazonaws.
 1. If you downloaded `fly` from the console:
    1. `fly` is an executable so on Mac or Linux run `chmod a+x` to make it executable.  The Windows version is `fly.exe`, so you can skip this step.
 
-1. Add `fly` to your `PATH` (on a Mac or Linux machine you can just copy it into `/usr/local`).
+1. Add `fly` to your `PATH` (on a Mac or Linux machine you can just copy it into `/usr/local/bin`).
+
+1. Like Cloud Foundry's `cf` utility, you need to target your concourse VM however it doesn't work the same way.  You have to add a `-target URL` to every `fly` command, which is tedious, or save it like this:
+ 
+    fly --target "http://ec2-54-86-210-135.compute-1.amazonaws.com:8080" configure save-target aws
+
+No you can run commands like `fly -t aws ....`.  To target locally run `fly -t local ...`.
 
 ## Using Concourse
 
