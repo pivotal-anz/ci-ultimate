@@ -33,12 +33,13 @@ A concourse instance is running on AWS at ec2-54-86-210-135.compute-1.amazonaws.
 
 1. You can access the dashboard at http://ec2-54-86-210-135.compute-1.amazonaws.com:8080.
 
-1. There is the same option to download `fly` or, if you have `fly` already run `fly --target "http://ec2-54-86-210-135.compute-1.amazonaws.com:8080" sync`.  Either way the doanload takes a while be patient.
+1. There is the same option to download `fly` or, if you have `fly` already run `fly --target "http://ec2-54-86-210-135.compute-1.amazonaws.com:8080" sync`.  Either way the doanload takes a while so be patient.
  
 1. If you downloaded `fly` from the console:
+
    1. `fly` is an executable so on Mac or Linux run `chmod a+x` to make it executable.  The Windows version is `fly.exe`, so you can skip this step.
 
-1. Add `fly` to your `PATH` (on a Mac or Linux machine you can just copy it into `/usr/local/bin`).
+   1. Add `fly` to your `PATH` (on a Mac or Linux machine you can just copy it into `/usr/local/bin`).
 
 1. Like Cloud Foundry's `cf` utility, you need to target your concourse VM however it doesn't work the same way.  You have to add a `-target URL` to every `fly` command, which is tedious, or save it like this:
  
