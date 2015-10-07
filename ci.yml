@@ -12,6 +12,15 @@ resources:
   source:
     uri: https://github.com/pivotal-anz/ci-ultimate
     branch: master
+- name: pcf-fe-apj
+  type: cf
+  source:
+    api: https://api.apj.fe.pivotal.io
+    username: fadzi
+    password: demo
+    organization: anz
+    space: development
+    skip_cert_check: true
 
 jobs:
 - name: ci-pipeline
@@ -20,5 +29,9 @@ jobs:
     trigger: true
   - get: cf-spring-trader-repo
     trigger: true
+  # Unit test failing on our Concourse on AWS instance 
   - task: unit
     file: ci-ultimate-repo/ci/ci-task.yml
+  - put: pcf-fe-apj
+    params:
+      manifest: cf-spring-trader-repo/manifest-all.yml
