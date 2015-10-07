@@ -8,9 +8,11 @@ I personally found the documentation was not really clear until you knew what it
 
 # Getting Started
 
-To run Concourse you need:
+## Local VM
 
-1. To run it in a Virtual Machine using Vagrant and Virtual box. In any directory run:
+To run Concourse locally you need Vagrant and Virtual box installed.
+
+1. It runs as a local VM using a Vagrant spec. In any directory run:
  
    ```
    vagrant init concourse/lite # creates ./Vagrantfile
@@ -23,7 +25,21 @@ To run Concourse you need:
 
 1. `fly` is an executable so on Mac or Linux run `chmod a+x` to make it executable.  The Windows version is `fly.exe`, so you can skip this step.
 
-1. Add `fly` to your `PATH`.
+1. Add `fly` to your `PATH` (on a Mac or Linux machine you can just copy it into `/usr/local`).
+
+## Concourse at AWS
+
+A concourse instance is running on AWS at ec2-54-86-210-135.compute-1.amazonaws.com.
+1. You can access the dashboard at http://ec2-54-86-210-135.compute-1.amazonaws.com:8080.
+
+1. There is the same option to download `fly` or, if you have `fly` already run `fly --target "http://ec2-54-86-210-135.compute-1.amazonaws.com:8080" sync`.  Either way the doanload takes a while be patient.
+ 
+1. If you downloaded `fly` from the console:
+   1. `fly` is an executable so on Mac or Linux run `chmod a+x` to make it executable.  The Windows version is `fly.exe`, so you can skip this step.
+
+1. Add `fly` to your `PATH` (on a Mac or Linux machine you can just copy it into `/usr/local`).
+
+## Using Concourse
 
 The Concourse [Getting Started](http://concourse.ci/getting-started.html) guide now gets you to create a YAML flow definition and run it, which you can do now if you wish.   However I think it helps to understand what Concourse does first and _then_ run a flow.
 
