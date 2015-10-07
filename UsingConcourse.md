@@ -30,6 +30,7 @@ To run Concourse locally you need Vagrant and Virtual Box installed.
 ## Concourse at AWS
 
 A concourse instance is running on AWS at ec2-54-86-210-135.compute-1.amazonaws.com.
+
 1. You can access the dashboard at http://ec2-54-86-210-135.compute-1.amazonaws.com:8080.
 
 1. There is the same option to download `fly` or, if you have `fly` already run `fly --target "http://ec2-54-86-210-135.compute-1.amazonaws.com:8080" sync`.  Either way the doanload takes a while be patient.
