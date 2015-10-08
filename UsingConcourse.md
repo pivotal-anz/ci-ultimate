@@ -27,7 +27,7 @@ To run Concourse locally you need Vagrant and Virtual Box installed.
 
 1. Add `fly` to your `PATH` (on a Mac or Linux machine you can just copy it into `/usr/local/bin`).
 
-1. By default, `fly` lwys tries to _target_ a local machine, so there is nothing more to do.
+1. By default, `fly` alawys tries to _target_ the local machine, so there is nothing more to do.
 
 ## Concourse at AWS
 
@@ -78,13 +78,19 @@ run:
 
 Note that the task is actually executed by a Docker container, so I guess the Concourse VM has Docker installed internally.
 
-There are many, many images at http://dockerhub.com, we are using a linux VM running Java V8 since we want to run continuous intgration tests on __Spring Trader__ which is a Java application
+There are many, many images at http://dockerhub.com, we are using a linux VM running Java V8 since we want to run continuous intgration tests on _Spring Trader_ which is a Java application
 
 This task runs the `ci-test` script in `ci-ultimate-repo`.  Which brings us to resources.
 
 ## Resources
 
-The `ci-ultimate-repo` input is a resource and it is specified as part of the job flow like this:
+Resources are inputs and outputs.  Typically a Concourse flow is defined as a project on github and
+is used as a resource for itself, like here.
+
+The task above defines two input resources `ci-ultimate-repo` (this project) and `cf-spring-trader-repo`
+(what we want to build, test and deploy).  We will deploy to Cloud Foundry which is an _output_ resource.
+
+A resource is specified as part of the job flow like this:
 
 ```
 resources:
