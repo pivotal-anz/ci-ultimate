@@ -27,15 +27,18 @@ To run Concourse locally you need Vagrant and Virtual Box installed.
 
 1. Add `fly` to your `PATH` (on a Mac or Linux machine you can just copy it into `/usr/local/bin`).
 
+1. By default, `fly` lwys tries to _target_ a local machine, so there is nothing more to do.
+
 ## Concourse at AWS
 
 A concourse instance is running on AWS at ec2-54-86-210-135.compute-1.amazonaws.com.
 
 1. You can access the dashboard at http://ec2-54-86-210-135.compute-1.amazonaws.com:8080.
 
-1. There is the same option to download `fly` or, if you have `fly` already run `fly --target "http://ec2-54-86-210-135.compute-1.amazonaws.com:8080" sync`.  Either way the doanload takes a while so be patient.
+1. There is the same option to download `fly` or, if you have `fly` already run `fly --target "http://ec2-54-86-210-135.compute-1.amazonaws.com:8080" sync`.  Either way a copy of `fly` is downloaded.  It
+takes a while, so be patient.
  
-1. If you downloaded `fly` from the console:
+1. If you downloaded `fly` from the console (instead of running `sync`):
 
    1. `fly` is an executable so on Mac or Linux run `chmod a+x` to make it executable.  The Windows version is `fly.exe`, so you can skip this step.
 
