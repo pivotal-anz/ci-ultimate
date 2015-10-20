@@ -10,5 +10,5 @@ echo "Running tests"
 cd cf-spring-trader-repo
 pwd
 # Test failing on Concourse on AWS, just do an assemble for deployment to PCF
-../gradle-2.6/bin/gradle assemble
+../gradle-2.6/bin/gradle -x test assemble
 

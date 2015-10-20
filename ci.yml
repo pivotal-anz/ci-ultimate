@@ -34,4 +34,4 @@ jobs:
     file: ci-ultimate-repo/ci/ci-task.yml
   - put: pcf-fe-apj
     params:
-      manifest: cf-spring-trader-repo/manifest-all.yml
+      manifest: cf-spring-trader-repo/manifest-ci.yml
