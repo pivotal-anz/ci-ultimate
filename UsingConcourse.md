@@ -46,7 +46,7 @@ takes a while, so be patient.
 
 1. Like Cloud Foundry's `cf` utility, you need to target your concourse VM however it doesn't work the same way.  You have to add a `-target URL` to every `fly` command, which is tedious, or save it like this:
  
-    fly --target "http://ec2-54-86-210-135.compute-1.amazonaws.com:8080" configure save-target aws
+    fly --target "http://ec2-52-7-64-81.compute-1.amazonaws.com:8080" configure save-target aws
 
 No you can run commands like `fly -t aws ....`.  To target locally run `fly -t local ...`.
 
@@ -103,9 +103,9 @@ resources:
 
 To keep things simple for now, let's just assume this Github repository is public, like this one.
 
-The script we want to run is in `my-repo/scripts`.
+The script we want to run is in `ci-ultimate-repo/scripts`.
 
-Thus to modify the task, modify `my-repo/scripts/test`, push the change and rerun the job.
+Thus to modify the task, modify `ci-ultimate-repo/scripts/ci-test`, push the change and rerun the job.
 
 Several types of predefined resources are provided by Concourse, including `git`.  If you look at the Concourse [github project](https://github.com/concourse?query=resource) you will see several resource sub-projects for both input (getting docker images, pulling from git, fetching data from Amazon S3) and output (pushing to Cloud Foundry, saving to S3).
 
@@ -115,23 +115,23 @@ We combine the resource and its task into a Job like this:
 
 ```
 resources:
-- name: my-repo
+- name: ci-ultimate-repo
   type: git
   source:
-    uri: https://github.com/paulc4/my-repo
+    uri: https://github.com/pivotal-anz/ci-ultimate
     branch: master
 
 jobs:
-- name: test-pipeline
-  - get: my-repo   # Fetch the resource
+- name: ci-pipeline
+  - get: ci-ultimate-repo  # Fetch the resource
     trigger: true  # Rerun automatically if repo changes
   - task: unit     # Run the unit test
-    file: my-repo/ci/test-task.yml
+    file: ci-ultimate-repo/ci/test-task.yml
 ```
 
 Note:
 
-1. `my-repo` contains both the test script (`my-repo/scripts/test`) and the task (`my-repo/ci/test-task.yml`) to run it.
+1. `ci-ultimate-repo` contains both the test script (`ci-ultimate-repo/scripts/test`) and the task (`ci-ultimate-repo/ci/ci-task.yml`) to run it.
 1. The task name `unit` is arbitrary.  There are _no_ predefined tasks.
 
 A job consists of one or more "steps".  Just a few of the predefined job-steps are:
@@ -144,36 +144,36 @@ Suppose our test script outputs to a log file `test-out.log`.  We can add a step
 
 ```
 resources:
-- name: my-repo
+- name: ci-ultimate-repo
   type: git
   source:
-    uri: https://github.com/paulc4/my-repo
+    uri: https://github.com/pivotal-anz/ci-ultimate
     branch: master
 
 jobs:
-- name: test-pipeline
+- name: ci-pipeline
   plan:
-  - get: my-repo
+  - get: ci-ultimate-repo
     trigger: true
   - task: unit
-    file: my-repo/ci/test-task.yml
+    file: ci-ultimate-repo/ci/ci-task.yml
 ```
 
-Let's call this `first.yml`.
+This is the file `ci.yml`.
 
 # Running a Job
 
 From a command line (Terminal or CMD window), run:
 
 ```
-fly configure test-pipeline -c first.yml --paused=false
+fly -t aws configure ci-pipeline -c ci.yml --paused=false
 ```
 
 You will be prompted with `apply configuration? (y/n)` - just answer `y`.  This sets up the new Job as a pipeline and makes it runable (`paused=false`).
 
 __Note:__ Make sure the name of the pipeline specified in `fly configure` is the same as the name in the YAML file.  They don't have to be the same, it's just annoyingly confusing if they aren't.
 
-Once `fly` has setup the pipeline, it should also tell you the URL to use to view the pipeline [http://192.168.100.4:8080/pipelines/test-pipeline](http://192.168.100.4:8080/pipelines/test-pipeline).
+Once `fly` has setup the pipeline, it should also tell you the URL to use to view the pipeline [http://192.168.100.4:8080/pipelines/cipipeline](http://192.168.100.4:8080/pipelines/ci-pipeline).
 
 Open this URL now and you should see:
 
@@ -187,7 +187,7 @@ Click the + button on the right to run the job (run the flow).
 
 It will go orange (running) and then green (succeeded).  If it goes red, the job failed.
 
-The run number (#1) will have appeared and so will the steps.  Click on my-repo and unit to make them show their output.  You should see this:
+The run number (#1) will have appeared and so will the steps.  Click on ci-ultimate-repo and unit to make them show their output.  You should see this:
 
 ![Jobs Output](https://github.com/paulc4/my-repo/blob/master/screenshots/job-output.png)
 
