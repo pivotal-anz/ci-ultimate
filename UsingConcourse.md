@@ -37,8 +37,9 @@ A concourse instance is already setup at AWS at ec2-52-91-98-156.compute-1.amazo
 
 1. You can access the dashboard at http://52.91.98.156:8080 or http://ec2-52-91-98-156.compute-1.amazonaws.com:8080.
 
-1. There is the same option to download `fly` **but** if you have `fly` already *you must* run `fly --target "http://ec2-52-91-98-156.compute-1.amazonaws.com:8080" sync` instead (or it won't work properly later; the `fly` utility seems to be intimately linked to the Concourse installation it came from).  Either way a copy of `fly` is downloaded.  It
-takes a while, so be patient.
+1. There is the same option to download `fly` **but** if you have `fly` already *you must* run `fly --target "http://ec2-52-91-98-156.compute-1.amazonaws.com:8080" sync` instead (or it won't work properly later; the `fly`
+utility seems to be intimately linked to the Concourse installation it came from).  Either way a copy of `fly` is
+downloaded which takes a while.  Using `sync` takes an _excruciatingly_ long time to run, so just be patient.
  
 1. If you downloaded `fly` from the console (instead of running `sync`):
 
@@ -223,6 +224,8 @@ Job summary
 
 # Running a Job
 
+## Use Concourse on AWS
+
 From a command line (Terminal or CMD window), run:
 
 ```
@@ -250,6 +253,14 @@ It will go orange (running) and then green (succeeded).  If it goes red, the job
 The run number (#1) will have appeared and so will the steps.  Click on ci-ultimate-repo and unit to make them show their output.  You should see this:
 
 ![Jobs Output](https://github.com/pivotal-anz/ci-ultimate/blob/master/screenshots/job-output.png)
+
+## Running Locally
+
+```
+fly -t local configure ci-pipeline -c ci.yml --paused=false
+```
+
+The URL to use to view the pipeline will be [http://192.168.100.4:8080/pipelines/cipipeline](http://192.168.100.4:8080/pipelines/ci-pipeline).
 
 ## Using the Web Interface
 
