@@ -171,7 +171,8 @@ Then create a task to `put` to this resource - see next section.
 This is defined by the file `ci.yml`:
 
 ```
-# A script that runs a Gradle Docker image to run integration tests
+# A flow that uses a Gradle Docker image to run integration tests and if successful 
+# pushes the application to PCF
 resources:
 - name: cf-spring-trader-repo
   type: git
@@ -199,13 +200,16 @@ resources:
 jobs:
 - name: ci-pipeline
   plan:
+  # Clone this repository
   - get: ci-ultimate-repo
     trigger: true
+  # Clone the application to test
   - get: cf-spring-trader-repo
     trigger: true
-  # Unit test failing on our Concourse on AWS instance 
+  # Run the unit test
   - task: unit
     file: ci-ultimate-repo/ci/ci-task.yml
+  # Push to PCF
   - put: pcf-bedazzle
     params:
       manifest: cf-spring-trader-repo/manifest-ci.yml
