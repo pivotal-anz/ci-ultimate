@@ -144,7 +144,7 @@ A job consists of one or more "steps".  Just a few of the predefined job-steps a
 1. `put`: update a resource
 1. `task`: execute a task
 
-## Integration with Cloud Foundry
+### Integration with Cloud Foundry
 
 A `put` task can be used to push an application to Cloud Foundry.  The Cloud Foundry Foundation to use is also specified as
 a resource, like this:
@@ -166,7 +166,7 @@ The `api` property is the public URL of the Cloud Controller API - for example `
 
 Then create a task to `put` to this resource - see next section.
 
-## The Complete Job
+### The Complete Job
 
 This is defined by the file `ci.yml`:
 
@@ -233,11 +233,11 @@ Once `fly` has setup the pipeline, it should also tell you the URL to use to vie
 
 Open this URL now and you should see:
 
-![Pipeline Page](https://github.com/paulc4/my-repo/blob/master/screenshots/pipeline-page.png)
+![Pipeline Page](https://github.com/pivotal-anz/ci-ultimate/blob/master/screenshots/pipeline-page.png)
 
 Click on the grey-box and you see this:
 
-![Pipeline Jobs Page](https://github.com/paulc4/my-repo/blob/master/screenshots/pipeline-jobs-page.png)
+![Pipeline Jobs Page](https://github.com/pivotal-anz/ci-ultimate/blob/master/screenshots/pipeline-jobs-page.png)
 
 Click the + button on the right to run the job (run the flow).
 
@@ -245,7 +245,7 @@ It will go orange (running) and then green (succeeded).  If it goes red, the job
 
 The run number (#1) will have appeared and so will the steps.  Click on ci-ultimate-repo and unit to make them show their output.  You should see this:
 
-![Jobs Output](https://github.com/paulc4/my-repo/blob/master/screenshots/job-output.png)
+![Jobs Output](https://github.com/pivotal-anz/ci-ultimate/blob/master/screenshots/job-output.png)
 
 ## Using the Web Interface
 
