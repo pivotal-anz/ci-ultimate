@@ -33,9 +33,9 @@ To run Concourse locally you need Vagrant and Virtual Box installed.
 
 A concourse instance is running on AWS at ec2-54-86-210-135.compute-1.amazonaws.com.
 
-1. You can access the dashboard at http://ec2-54-86-210-135.compute-1.amazonaws.com:8080.
+1. You can access the dashboard at http://52.91.98.156:8080 or http://ec2-52-91-98-156.compute-1.amazonaws.com:8080.
 
-1. There is the same option to download `fly` or, if you have `fly` already run `fly --target "http://ec2-54-86-210-135.compute-1.amazonaws.com:8080" sync`.  Either way a copy of `fly` is downloaded.  It
+1. There is the same option to download `fly` or, if you have `fly` already run `fly --target "http://ec2-52-91-98-156.compute-1.amazonaws.com:8080" sync`.  Either way a copy of `fly` is downloaded.  It
 takes a while, so be patient.
  
 1. If you downloaded `fly` from the console (instead of running `sync`):
@@ -46,7 +46,7 @@ takes a while, so be patient.
 
 1. Like Cloud Foundry's `cf` utility, you need to target your concourse VM however it doesn't work the same way.  You have to add a `-target URL` to every `fly` command, which is tedious, or save it like this:
  
-    fly --target "http://ec2-52-7-64-81.compute-1.amazonaws.com:8080" configure save-target aws
+    fly --target "http://ec2-52-91-98-156.compute-1.amazonaws.com:8080" configure save-target aws
 
 No you can run commands like `fly -t aws ....`.  To target locally run `fly -t local ...`.
 
