@@ -31,7 +31,9 @@ To run Concourse locally you need Vagrant and Virtual Box installed.
 
 ## Concourse at AWS
 
-A concourse instance is running on AWS at ec2-54-86-210-135.compute-1.amazonaws.com.
+A concourse instance is already setup at AWS at ec2-52-91-98-156.compute-1.amazonaws.com.
+
+> To create an instance, use the EC2 dashboard to create a new instance (click `Launch Instance`).  Next, on the left, select > Community AMIs, enter `Concourse` in the search box, hit `Enter` and select one of the existing Concourse images - we used > `concourse-0.61.0` for the instance referred to in these notes.
 
 1. You can access the dashboard at http://52.91.98.156:8080 or http://ec2-52-91-98-156.compute-1.amazonaws.com:8080.
 
@@ -48,7 +50,7 @@ takes a while, so be patient.
  
     fly --target "http://ec2-52-91-98-156.compute-1.amazonaws.com:8080" configure save-target aws
 
-No you can run commands like `fly -t aws ....`.  To target locally run `fly -t local ...`.
+Now you can run commands like this `fly -t aws ....`.  To target locally run `fly -t local ...`.
 
 ## Using Concourse
 
@@ -108,6 +110,9 @@ The script we want to run is in `ci-ultimate-repo/scripts`.
 Thus to modify the task, modify `ci-ultimate-repo/scripts/ci-test`, push the change and rerun the job.
 
 Several types of predefined resources are provided by Concourse, including `git`.  If you look at the Concourse [github project](https://github.com/concourse?query=resource) you will see several resource sub-projects for both input (getting docker images, pulling from git, fetching data from Amazon S3) and output (pushing to Cloud Foundry, saving to S3).
+
+*Important Note:* Although the project on github is called `ci-ultimate`, because we have called the resource `ci-ultimate-repo`, it is cloned onto the Concourse VM into a directory also called `ci-ultimate-repo`.  Thus the script we want to run is 
+`ci-ultimate-repo/scripts/ci-test`.
 
 ## Jobs
 
