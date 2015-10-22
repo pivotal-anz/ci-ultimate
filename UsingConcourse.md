@@ -37,7 +37,7 @@ A concourse instance is already setup at AWS at ec2-52-91-98-156.compute-1.amazo
 
 1. You can access the dashboard at http://52.91.98.156:8080 or http://ec2-52-91-98-156.compute-1.amazonaws.com:8080.
 
-1. There is the same option to download `fly` or, if you have `fly` already run `fly --target "http://ec2-52-91-98-156.compute-1.amazonaws.com:8080" sync`.  Either way a copy of `fly` is downloaded.  It
+1. There is the same option to download `fly` **but** if you have `fly` already *you must* run `fly --target "http://ec2-52-91-98-156.compute-1.amazonaws.com:8080" sync` instead (or it won't work properly later; the `fly` utility seems to be intimately linked to the Concourse installation it came from).  Either way a copy of `fly` is downloaded.  It
 takes a while, so be patient.
  
 1. If you downloaded `fly` from the console (instead of running `sync`):
@@ -280,21 +280,8 @@ jobs:
         args: ["Hello, world!"]
 ```
 
-The `say-hello` task is defined using the `config` sub-element instead of a YAML file.  Hence this flow requires no resources.
+The `say-hello` task is defined using the `config` sub-element instead of a YAML file.  Moreover this flow requires no input or output resources.
 
-As a result, this flow appears in the Web GUI as a single grey box which doesn't look like a flow at all (since it has no input or output resources).
+As a result, this flow appears in the Web GUI as a single grey box which doesn't look like a flow at all (since it has no input or output).
 
 Whilst this is a nice simple first example, it is not typical and, personally, I found it more confusing than helpful.
-
-
-
-
-
-
-
-
-
-
-
-
- 
