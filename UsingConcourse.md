@@ -111,8 +111,7 @@ Thus to modify the task, modify `ci-ultimate-repo/scripts/ci-test`, push the cha
 
 Several types of predefined resources are provided by Concourse, including `git`.  If you look at the Concourse [github project](https://github.com/concourse?query=resource) you will see several resource sub-projects for both input (getting docker images, pulling from git, fetching data from Amazon S3) and output (pushing to Cloud Foundry, saving to S3).
 
-*Important Note:* Although the project on github is called `ci-ultimate`, because we have called the resource `ci-ultimate-repo`, it is cloned onto the Concourse VM into a directory also called `ci-ultimate-repo`.  Thus the script we want to run is 
-`ci-ultimate-repo/scripts/ci-test`.
+**Important Note:** Although the repository (project) on github is called `ci-ultimate`, because we have called the resource `ci-ultimate-repo`, it is cloned onto the Concourse VM into a directory also called `ci-ultimate-repo`.  Thus the script we want to run is `ci-ultimate-repo/scripts/ci-test`.
 
 ## Jobs
 
@@ -145,26 +144,78 @@ A job consists of one or more "steps".  Just a few of the predefined job-steps a
 1. `put`: update a resource
 1. `task`: execute a task
 
-Suppose our test script outputs to a log file `test-out.log`.  We can add a step to view it.  I have also modified the script to use my github id (paulc4):
+## Integration with Cloud Foundry
+
+A `put` task can be used to push an application to Cloud Foundry.  The Cloud Foundry Foundation to use is also specified as
+a resource, like this:
 
 ```
+resources
+- name: pcf-bedazzle
+  type: cf
+  source:
+    api: <foundation>
+    user: <user-name>
+    password: <passowrd>
+    organization: <org>
+    space: <space>
+    skip_cert_check: true
+```
+
+The `api` property is the public URL of the Cloud Controller API - for example `https://api.run.pivotal.io` to target PWS.
+
+Then create a task to `put` to this resource - see next section.
+
+## The Complete Job
+
+This is defined by the file `ci.yml`:
+
+```
+# A script that runs a Gradle Docker image to run integration tests
 resources:
+- name: cf-spring-trader-repo
+  type: git
+  source:
+    #uri: https://github.com/cf-platform-eng/springtrader-cf
+    uri: https://github.com/pivotal-anz/cf-SpringBootTrader
+    branch: master
 - name: ci-ultimate-repo
   type: git
   source:
     uri: https://github.com/pivotal-anz/ci-ultimate
     branch: master
+- name: pcf-bedazzle
+  type: cf
+  source:
+    #api: https://api.apj.fe.pivotal.io
+    #username: fadzi
+    api: https://api.pcf-demo.com
+    user: ci@pcf-demo.com
+    password: demo
+    organization: Bedazzle
+    space: development
+    skip_cert_check: true
 
 jobs:
 - name: ci-pipeline
   plan:
   - get: ci-ultimate-repo
     trigger: true
+  - get: cf-spring-trader-repo
+    trigger: true
+  # Unit test failing on our Concourse on AWS instance 
   - task: unit
     file: ci-ultimate-repo/ci/ci-task.yml
+  - put: pcf-bedazzle
+    params:
+      manifest: cf-spring-trader-repo/manifest-ci.yml
 ```
 
-This is the file `ci.yml`.
+Job summary
+ 1. `get: ci-ultimate-repo` Fetch this repository from git hib
+ 1. `get: cf-spring-trader-repo` Fetch Spring Trader repository from github.
+ 1. `task: unit` Execute the task `ci-ultimate-repo/ci/ci-task.yml` which in turn runs the script `ci-ultimate-repo/scripts/ci-test`
+ 1. `put: pcf-bedazzle` Push the application to our Cloud Foundry instance using the specified manifest.
 
 # Running a Job
 
