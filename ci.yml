@@ -15,10 +15,8 @@ resources:
 - name: pcf-bedazzle
   type: cf
   source:
-    #api: https://api.apj.fe.pivotal.io
-    #username: fadzi
     api: https://api.pcfdemo.info
-    user: ci@pcf-demo.com
+    username: ci@pcf-demo.com
     password: demo
     organization: Bedazzle
     space: development
@@ -37,3 +35,4 @@ jobs:
   - put: pcf-bedazzle
     params:
       manifest: cf-spring-trader-repo/manifest-ci.yml
+      path: cf-spring-trader-repo
