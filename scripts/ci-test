@@ -11,5 +11,5 @@ cd cf-spring-trader-repo
 pwd
 
 # If test fails on Concourse on AWS, just do an assemble for deployment to PCF, use -x
-../gradle-2.6/bin/gradle test assemble
+../gradle-2.6/bin/gradle -x test assemble
 
