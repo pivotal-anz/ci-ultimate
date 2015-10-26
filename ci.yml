@@ -35,4 +35,3 @@ jobs:
   - put: pcf-bedazzle
     params:
       manifest: cf-spring-trader-repo/manifest-ci.yml
-      path: cf-spring-trader-repo
