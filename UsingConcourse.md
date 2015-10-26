@@ -49,7 +49,7 @@ downloaded which takes a while.  Using `sync` takes an _excruciatingly_ long tim
 
 1. Like Cloud Foundry's `cf` utility, you need to target your concourse VM however it doesn't work the same way.  You have to add a `-target URL` to every `fly` command, which is tedious, or save it like this:
  
-    fly --target "http://ec2-52-7-64-81.compute-1.amazonaws.com:8080" configure save-target aws
+    fly --target "http://ec2-52-7-64-81.compute-1.amazonaws.com:8080" save-target aws
 
 Now you can run commands like this `fly -t aws ....`.  To target locally run `fly -t local ...`.
 
