@@ -194,7 +194,7 @@ resources:
   source:
     #api: https://api.apj.fe.pivotal.io
     #username: fadzi
-    api: https://api.pcf-demo.com
+    api: https://api.pcfdemo.info
     user: ci@pcf-demo.com
     password: demo
     organization: Bedazzle
