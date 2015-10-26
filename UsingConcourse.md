@@ -19,9 +19,11 @@ To run Concourse locally you need Vagrant and Virtual Box installed.
    vagrant up                  # downloads the box & spins up the VM
    ```
 
-1. You can then access its web interface in any browser at [http://192.168.100.4:8080](http://192.168.100.4:8080)
+1. You can then access its web interface in any browser at [http://192.168.100.4:8080](http://192.168.100.4:8080). It should look like this:
 
-1. Finally download the Fly CLI from the main page where there are links to binaries for common platforms.  Save it in a sensible place.
+![Initial Home Page](https://github.com/pivotal-anz/ci-ultimate/blob/master/screenshots/no-pipelines.png)
+
+1. Next download the Fly CLI from the main page where there are links to binaries for common platforms.  Save it in a sensible place.
 
 1. `fly` is an executable so on Mac or Linux run `chmod a+x` to make it executable.  The Windows version is `fly.exe`, so you can skip this step.
 
