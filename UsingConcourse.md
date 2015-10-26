@@ -31,13 +31,13 @@ To run Concourse locally you need Vagrant and Virtual Box installed.
 
 ## Concourse at AWS
 
-A concourse instance is already setup at AWS at ec2-52-91-98-156.compute-1.amazonaws.com.
+A concourse instance is already setup at AWS at ec2-52-7-64-81.compute-1.amazonaws.com.
 
 > To create an instance, use the EC2 dashboard to create a new instance (click `Launch Instance`).  Next, on the left, select > Community AMIs, enter `Concourse` in the search box, hit `Enter` and select one of the existing Concourse images - we used > `concourse-0.61.0` for the instance referred to in these notes.
 
-1. You can access the dashboard at http://52.91.98.156:8080 or http://ec2-52-91-98-156.compute-1.amazonaws.com:8080.
+1. You can access the dashboard at http://52.7.64.81:8080 or http://ec2-52-7-64-81.compute-1.amazonaws.com:8080.
 
-1. There is the same option to download `fly` **but** if you have `fly` already *you must* run `fly --target "http://ec2-52-91-98-156.compute-1.amazonaws.com:8080" sync` instead (or it won't work properly later; the `fly`
+1. There is the same option to download `fly` **but** if you have `fly` already *you must* run `fly --target "http://ec2-52-7-64-81.compute-1.amazonaws.com:8080" sync` instead (or it won't work properly later; the `fly`
 utility seems to be intimately linked to the Concourse installation it came from).  Either way a copy of `fly` is
 downloaded which takes a while.  Using `sync` takes an _excruciatingly_ long time to run, so just be patient.
  
@@ -49,7 +49,7 @@ downloaded which takes a while.  Using `sync` takes an _excruciatingly_ long tim
 
 1. Like Cloud Foundry's `cf` utility, you need to target your concourse VM however it doesn't work the same way.  You have to add a `-target URL` to every `fly` command, which is tedious, or save it like this:
  
-    fly --target "http://ec2-52-91-98-156.compute-1.amazonaws.com:8080" configure save-target aws
+    fly --target "http://ec2-52-7-64-81.compute-1.amazonaws.com:8080" configure save-target aws
 
 Now you can run commands like this `fly -t aws ....`.  To target locally run `fly -t local ...`.
 
