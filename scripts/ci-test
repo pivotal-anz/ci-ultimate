@@ -9,6 +9,7 @@ gradle-2.6/bin/gradle -version
 echo "Running tests"
 cd cf-spring-trader-repo
 pwd
-# Test failing on Concourse on AWS, just do an assemble for deployment to PCF
-../gradle-2.6/bin/gradle -x test assemble
+
+# If test fails on Concourse on AWS, just do an assemble for deployment to PCF, use -x
+../gradle-2.6/bin/gradle test assemble
 
