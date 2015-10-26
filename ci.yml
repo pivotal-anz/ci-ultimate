@@ -32,6 +32,12 @@ jobs:
   # Unit test failing on our Concourse on AWS instance 
   - task: unit
     file: ci-ultimate-repo/ci/ci-task.yml
+  # Now push each app to Cloud Foundry, one at a time (sigh)
   - put: pcf-bedazzle
     params:
-      manifest: cf-spring-trader-repo/manifest-ci.yml
+      manifest: cf-spring-trader-repo/manifest-registry-ci.yml
+      path:cf-spring-trader-repo/registryServer/build/libs/registry-0.2.jar
+  - put: pcf-bedazzle
+    params:
+      manifest: cf-spring-trader-repo/manifest-quotes.yml
+      path:cf-spring-trader-repo/springboottrades-quotes/build/libs/quotes-0.2.jar
