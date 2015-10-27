@@ -25,14 +25,18 @@ resources:
 jobs:
 - name: ci-pipeline
   plan:
+  # Clone ci-ultimate project
   - get: ci-ultimate-repo
     trigger: true
+  # Clone cf-speing-trader project
   - get: cf-spring-trader-repo
     trigger: true
-  # Unit test failing on our Concourse on AWS instance 
+  # Unit test 
   - task: unit
     file: ci-ultimate-repo/ci/ci-task.yml
   # Now push each app to Cloud Foundry, one at a time (sigh)
+  #   Note how path starts with /unit, allowing these put tasks to pick up the
+  #   jar creatd by the unit task
   - put: pcf-bedazzle
     params:
       manifest: cf-spring-trader-repo/manifest-registry-ci.yml
@@ -41,3 +45,15 @@ jobs:
     params:
       manifest: cf-spring-trader-repo/manifest-quotes.yml
       path: unit/cf-spring-trader-repo/springboottrades-quotes/build/libs/quotes-0.2.jar
+  - put: pcf-bedazzle
+    params:
+      manifest: cf-spring-trader-repo/manifest-accounts.yml
+      path: unit/cf-spring-trader-repo/accounts-ci/build/libs/accounts-0.2.jar
+  - put: pcf-bedazzle
+    params:
+      manifest: cf-spring-trader-repo/manifest-portfolio.yml
+      path: unit/cf-spring-trader-repo/portfolio-ci/build/libs/portfolio-0.2.jar
+  - put: pcf-bedazzle
+    params:
+      manifest: cf-spring-trader-repo/manifest-web.yml
+      path: unit/cf-spring-trader-repo/webtrader-ci/build/libs/web-0.2.jar
